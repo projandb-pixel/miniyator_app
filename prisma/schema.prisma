@@ -1,0 +1,431 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+model Cities {
+  id         String    @id
+  name       String
+  provinceId String
+  createdAt  DateTime  @default(now())
+  Provinces  Provinces @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+
+  @@unique([provinceId, name])
+}
+
+model Comments {
+  id        String   @id
+  userId    String
+  tenderId  String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Tenders   Tenders  @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Posts {
+  id         String        @id
+  companyId  String
+  content    String?
+  imageData  Bytes?        @db.VarBinary(Max)
+  tenderId   String?      // تگ مناقصه (اختیاری)
+  likes      Int           @default(0)
+  comments   Int           @default(0)
+  views      Int           @default(0)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime
+  Companies  Companies     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  PostLikes  PostLikes[]
+  PostComments PostComments[]
+  PostViews  PostViews[]
+}
+
+model PostLikes {
+  id        String   @id
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  Posts     Posts    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([userId, postId])
+}
+
+model PostComments {
+  id        String   @id
+  userId    String
+  postId    String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Posts     Posts    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model PostViews {
+  id        String   @id
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  Posts     Posts    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([userId, postId])
+}
+
+model Companies {
+  id                       String                 @id
+  userId                   String                 @unique
+  name                     String
+  companyType              String?
+  registrationNumber       String?
+  nationalId               String?
+  city                     String
+  province                 String
+  address                  String?
+  officePhone              String?
+  email                    String?
+  website                  String?
+  logo                     Bytes?   @db.VarBinary(Max)
+  bio                      String?
+  workingHours             String?
+  welcomeMessage           String?
+  isVerified               Boolean                @default(false)
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime
+  activityType             String?
+  isKnowledgeBased         Boolean                @default(false)
+  legalType                String?
+  api                      Boolean                @default(false)
+  asme                     Boolean                @default(false)
+  equipmentList            String?
+  establishmentYear        String?
+  hseCertificate           Bytes?   @db.VarBinary(Max)
+  iso14001                 Boolean                @default(false)
+  iso45001                 Boolean                @default(false)
+  iso50001                 Boolean                @default(false)
+  iso9001                  Boolean                @default(false)
+  keyPersonnelCount        String?
+  letterheadImage          Bytes?   @db.VarBinary(Max)
+  mainActivityAreas        String?
+  ministryCertificate      Bytes?   @db.VarBinary(Max)
+  personnelCertificates    String?
+  qualificationCertificate Bytes?   @db.VarBinary(Max)
+  rank                     String?
+  rankCertificate          Bytes?   @db.VarBinary(Max)
+  wpsPqr                   Boolean                @default(false)
+  Users                    Users                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  CompanyCategories        CompanyCategories[]
+  Documents                Documents[]
+  PriceInquiries           PriceInquiries[]
+  Products                 Products[]
+  Projects                 Projects[]
+  Reviews                  Reviews[]
+  Stories                  Stories[]
+  TenderParticipations     TenderParticipations[]
+  SentMessages             Messages[]             @relation("MessagesFrom")
+  ReceivedMessages         Messages[]             @relation("MessagesTo")
+  Posts                    Posts[]
+}
+
+model CompanyCategories {
+  id        String    @id
+  companyId String
+  category  String
+  createdAt DateTime  @default(now())
+  Companies Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, category])
+}
+
+model CompanyIntroductions {
+  id           String   @id
+  companyName  String   @unique
+  title        String
+  description  String   @db.NVarChar(Max)
+  history      String?  @db.NVarChar(Max)
+  achievements String?  @db.NVarChar(Max)
+  facilities   String?  @db.NVarChar(Max)
+  image        Bytes?   @db.VarBinary(Max)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+}
+
+model Documents {
+  id        String    @id
+  companyId String
+  type      String
+  title     String
+  fileData  Bytes     @db.VarBinary(Max)
+  createdAt DateTime  @default(now())
+  Companies Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model Freelancers {
+  id         String   @id
+  name       String
+  phone      String   @unique
+  skill      String
+  experience String
+  dailyRate  String
+  location   String
+  available  Boolean  @default(true)
+  rating     Float    @default(0)
+  avatar     Bytes?   @db.VarBinary(Max)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+}
+
+model Likes {
+  id        String   @id
+  userId    String
+  tenderId  String
+  createdAt DateTime @default(now())
+  Tenders   Tenders  @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tenderId])
+}
+
+model Notifications {
+  id        String   @id
+  userId    String
+  type      String
+  title     String
+  message   String
+  url       String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  tenderId  String?
+  Tenders   Tenders? @relation(fields: [tenderId], references: [id])
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Messages {
+  id                String    @id
+  senderCompanyId   String
+  receiverCompanyId String
+  content           String
+  read              Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+
+  SenderCompany     Companies @relation("MessagesFrom", fields: [senderCompanyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ReceiverCompany   Companies @relation("MessagesTo", fields: [receiverCompanyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model PriceInquiries {
+  id                    String                  @id
+  contractorId          String
+  tenderId              String?                  // تگ مناقصه (اختیاری)
+  category              String
+  product               String
+  quantity              String
+  deliveryTime          String
+  description           String?
+  status                String                  @default("pending")
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime
+  Companies             Companies               @relation(fields: [contractorId], references: [id])
+  Tenders               Tenders?                @relation(fields: [tenderId], references: [id], onDelete: SetNull)
+  PriceInquiryResponses PriceInquiryResponses[]
+}
+
+model PriceInquiryResponses {
+  id             String         @id
+  inquiryId      String
+  supplierId     String
+  price          String
+  deliveryTime   String?
+  notes          String?
+  createdAt      DateTime       @default(now())
+  PriceInquiries PriceInquiries @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+}
+
+model Products {
+  id             String    @id
+  companyId      String
+  name           String
+  category       String
+  brand          String?
+  price          String?
+  priceRange     String?
+  description    String?
+  specifications String?
+  unit           String?
+  image          Bytes?   @db.VarBinary(Max)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime
+  Companies      Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model Projects {
+  id          String    @id
+  companyId   String
+  title       String
+  description String?
+  client      String?
+  value       String?
+  year        Int?
+  createdAt   DateTime  @default(now())
+  Companies   Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model Provinces {
+  id        String   @id
+  name      String   @unique
+  createdAt DateTime @default(now())
+  Cities    Cities[]
+}
+
+model Reviews {
+  id           String    @id
+  companyId    String
+  contractorId String
+  rating       Int
+  comment      String?
+  createdAt    DateTime  @default(now())
+  Companies    Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, contractorId])
+}
+
+model Saves {
+  id        String   @id
+  userId    String
+  tenderId  String
+  createdAt DateTime @default(now())
+  Tenders   Tenders  @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tenderId])
+}
+
+model Stories {
+  id         String       @id
+  companyId  String
+  type       String
+  title      String
+  content    String?
+  imageData  Bytes?   @db.VarBinary(Max)
+  videoData  Bytes?   @db.VarBinary(Max)
+  expiresAt  DateTime
+  views      Int          @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime
+  Companies  Companies    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  StoryViews StoryViews[]
+}
+
+model StoryViews {
+  id       String   @id
+  storyId  String
+  userId   String
+  viewedAt DateTime @default(now())
+  Stories  Stories  @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  Users    Users    @relation(fields: [userId], references: [id], onUpdate: NoAction)
+
+  @@unique([storyId, userId])
+}
+
+model TenderCategories {
+  id        String   @id
+  tenderId  String
+  category  String
+  createdAt DateTime @default(now())
+  Tenders   Tenders  @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+
+  @@unique([tenderId, category])
+}
+
+model TenderParticipations {
+  id                 String    @id
+  tenderId           String
+  companyId          String
+  status             String    @default("registered")
+  winningProbability Float?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime
+  Companies          Companies @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  Tenders            Tenders   @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+
+  @@unique([tenderId, companyId])
+}
+
+model TenderRequirements {
+  id          String   @id
+  tenderId    String
+  category    String
+  item        String
+  quantity    Int?
+  description String?
+  createdAt   DateTime @default(now())
+  Tenders     Tenders  @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+}
+
+model Tenders {
+  id                   String                 @id
+  company              String
+  title                String
+  description          String?
+  tenderNumber         String
+  tenderType           String
+  publishDate          DateTime
+  deadline             DateTime
+  documentDeliveryDeadline DateTime?
+  deliveryLocation     String?
+  status               String                 @default("active")
+  phase                String                 @default("receive_documents")
+  images               Bytes?                 @db.VarBinary(Max)
+  estimatedMin         Float?
+  estimatedMax         Float?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime
+  Comments             Comments[]
+  Likes                Likes[]
+  Notifications        Notifications[]
+  Saves                Saves[]
+  TenderCategories     TenderCategories[]
+  TenderParticipations TenderParticipations[]
+  TenderRequirements   TenderRequirements[]
+  TenderViews          TenderViews[]
+  PriceInquiries       PriceInquiries[]
+}
+
+model TenderViews {
+  id       String   @id
+  tenderId String
+  userId   String
+  userRole String
+  viewedAt DateTime @default(now())
+  Tenders  Tenders  @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  Users    Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([tenderId, userId])
+}
+
+model Users {
+  id               String          @id
+  phone            String          @unique
+  role             String
+  otpCode          String?
+  otpExpiresAt     DateTime?
+  isVerified       Boolean         @default(false)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime
+  password         String?
+  profileCompleted Boolean         @default(false)
+  Comments         Comments[]
+  Companies        Companies?
+  Likes            Likes[]
+  Notifications    Notifications[]
+  Saves            Saves[]
+  StoryViews       StoryViews[]
+  TenderViews      TenderViews[]
+  PostLikes        PostLikes[]
+  PostComments     PostComments[]
+  PostViews        PostViews[]
+}

@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#2563eb"/>
+  <circle cx="256" cy="256" r="200" stroke="white" stroke-width="8" fill="none"/>
+  
+  <!-- Megaphone body -->
+  <path d="M 180 200 L 180 312 L 260 280 L 260 232 Z" fill="white"/>
+  
+  <!-- Sound waves -->
+  <path d="M 260 240 L 300 220 L 260 250 L 320 230 L 260 256 L 340 240" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <path d="M 260 256 L 300 276 L 260 262 L 320 282 L 260 272 L 340 288" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+</svg>
+
+
+
+
+
+
+
+

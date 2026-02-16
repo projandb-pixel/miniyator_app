@@ -1,0 +1,2183 @@
+@import "tailwindcss";
+
+/* Font Imports */
+@font-face {
+  font-family: "IRANSans";
+  src: url("/fonts/IRANSans/IRANSansWeb.eot");
+  src: url("/fonts/IRANSans/IRANSansWeb.eot") format("embedded-opentype"),
+    url("/fonts/IRANSans/IRANSansWeb(FaNum).woff") format("woff"),
+    url("/fonts/IRANSans/IRANSansWeb.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000; /* کاملاً سیاه برای کنتراست حداکثری */
+  
+  /* Typography */
+  --font-primary: "IRANSans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Kalameh", "IRANSans", system-ui, sans-serif;
+  
+  /* Text Colors - خیلی تیره برای خوانایی کامل */
+  --text-primary: #000000;
+  --text-secondary: #1f2937;
+  --text-muted: #374151;
+  --text-light: #4b5563;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --text-primary: #ededed;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+  }
+}
+
+body {
+  background: var(--background);
+  color: #000000 !important;
+  font-family: var(--font-primary);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در body تیره هستند */
+body *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]):not([class*="text-red"]):not([class*="bg-"]) {
+  color: #000000 !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای کلاس‌های Tailwind - خیلی تیره */
+.text-gray-600 {
+  color: #1f2937 !important; /* خیلی تیره */
+}
+
+.text-gray-700 {
+  color: #111827 !important; /* تقریباً سیاه */
+}
+
+.text-gray-800 {
+  color: #000000 !important; /* کاملاً سیاه */
+}
+
+.text-gray-500 {
+  color: #374151 !important; /* تیره */
+}
+
+.text-gray-400 {
+  color: #4b5563 !important; /* تیره */
+}
+
+.text-gray-300 {
+  color: #6b7280 !important; /* تیره */
+}
+
+/* بهبود کنتراست برای متن‌های پیش‌فرض */
+p, span, div, label, button, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای متن‌های کوچک */
+.text-sm, .text-xs {
+  color: var(--text-secondary) !important;
+}
+
+/* بهبود کنتراست برای تمام متن‌ها در پس‌زمینه سفید */
+.bg-white * {
+  color: #191818 !important;
+}
+
+.bg-white p,
+.bg-white span,
+.bg-white div,
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white h4,
+.bg-white h5,
+.bg-white h6,
+.bg-white label {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای input ها */
+input,
+textarea,
+select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* بهبود کنتراست برای label ها */
+label {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* بهبود کنتراست برای input ها در پس‌زمینه روشن */
+.bg-gray-50 input,
+.bg-gray-50 textarea,
+.bg-gray-50 select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+.bg-white input,
+.bg-white textarea,
+.bg-white select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* بهبود کنتراست برای پس‌زمینه‌های روشن */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+/* بهبود کنتراست برای لینک‌ها */
+a {
+  color: #2563eb !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+}
+
+.bg-white a {
+  color: #2563eb !important;
+}
+
+.bg-white a:hover {
+  color: #1d4ed8 !important;
+}
+
+/* Mobile-first responsive container */
+.mobile-container {
+  max-width: 428px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* بهبود کنتراست برای دکمه‌ها */
+button {
+  color: inherit;
+}
+
+button.text-black {
+  color: #000000 !important;
+}
+
+button.text-gray-600 {
+  color: #1f2937 !important;
+}
+
+button.text-red-500,
+button.text-red-600,
+svg.text-red-500,
+.text-red-500,
+.text-red-600 {
+  color: #ef4444 !important;
+}
+
+svg.text-red-500,
+svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+button.text-red-500 svg,
+button.text-red-600 svg {
+  color: #ef4444 !important;
+}
+
+button.text-red-500 svg[fill="#ef4444"],
+button.text-red-600 svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+button.text-red-500 svg[stroke="#ef4444"],
+button.text-red-600 svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+/* اطمینان از اینکه لایک همیشه قرمز است */
+button[onclick*="toggleLike"] svg {
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* بهبود کنتراست برای select option */
+select option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در پس‌زمینه سفید تیره هستند */
+.bg-white > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-50 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-100 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای تمام div ها و span ها */
+div:not([class*="bg-"]):not([class*="text-"]),
+span:not([class*="bg-"]):not([class*="text-"]) {
+  color: #000000 !important;
+}
+
+/* Bottom sheet animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Top sheet animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Hide scrollbar for stories */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* بهبود اسکرول افقی برای استوری‌ها */
+.stories-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.stories-container > * {
+  flex-shrink: 0 !important;
+}
+
+/* سفید کردن تمام متن‌ها در باکس‌های آبی تیره */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+[class*="bg-blue-500"],
+[class*="bg-blue-600"],
+[class*="bg-blue-700"] {
+  color: #ffffff !important;
+}
+
+.bg-blue-500 *:not(input):not(textarea):not(select),
+.bg-blue-600 *:not(input):not(textarea):not(select),
+.bg-blue-700 *:not(input):not(textarea):not(select),
+[class*="bg-blue-500"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-600"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-700"] *:not(input):not(textarea):not(select) {
+  color: #ffffff !important;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000; /* کاملاً سیاه برای کنتراست حداکثری */
+  
+  /* Typography */
+  --font-primary: "IRANSans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Kalameh", "IRANSans", system-ui, sans-serif;
+  
+  /* Text Colors - خیلی تیره برای خوانایی کامل */
+  --text-primary: #000000;
+  --text-secondary: #1f2937;
+  --text-muted: #374151;
+  --text-light: #4b5563;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --text-primary: #ededed;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+  }
+}
+
+body {
+  background: var(--background);
+  color: #000000 !important;
+  font-family: var(--font-primary);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در body تیره هستند */
+body *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]):not([class*="text-red"]):not([class*="bg-"]) {
+  color: #000000 !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای کلاس‌های Tailwind - خیلی تیره */
+.text-gray-600 {
+  color: #1f2937 !important; /* خیلی تیره */
+}
+
+.text-gray-700 {
+  color: #111827 !important; /* تقریباً سیاه */
+}
+
+.text-gray-800 {
+  color: #000000 !important; /* کاملاً سیاه */
+}
+
+.text-gray-500 {
+  color: #374151 !important; /* تیره */
+}
+
+.text-gray-400 {
+  color: #4b5563 !important; /* تیره */
+}
+
+.text-gray-300 {
+  color: #6b7280 !important; /* تیره */
+}
+
+/* بهبود کنتراست برای متن‌های پیش‌فرض */
+p, span, div, label, button, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای متن‌های کوچک */
+.text-sm, .text-xs {
+  color: var(--text-secondary) !important;
+}
+
+/* بهبود کنتراست برای تمام متن‌ها در پس‌زمینه سفید */
+.bg-white * {
+  color: #191818 !important;
+}
+
+.bg-white p,
+.bg-white span,
+.bg-white div,
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white h4,
+.bg-white h5,
+.bg-white h6,
+.bg-white label {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای input ها */
+input,
+textarea,
+select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* بهبود کنتراست برای label ها */
+label {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* بهبود کنتراست برای input ها در پس‌زمینه روشن */
+.bg-gray-50 input,
+.bg-gray-50 textarea,
+.bg-gray-50 select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+.bg-white input,
+.bg-white textarea,
+.bg-white select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* بهبود کنتراست برای پس‌زمینه‌های روشن */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+/* بهبود کنتراست برای لینک‌ها */
+a {
+  color: #2563eb !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+}
+
+.bg-white a {
+  color: #2563eb !important;
+}
+
+.bg-white a:hover {
+  color: #1d4ed8 !important;
+}
+
+/* Mobile-first responsive container */
+.mobile-container {
+  max-width: 428px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* بهبود کنتراست برای دکمه‌ها */
+button {
+  color: inherit;
+}
+
+button.text-black {
+  color: #000000 !important;
+}
+
+button.text-gray-600 {
+  color: #1f2937 !important;
+}
+
+button.text-red-500,
+button.text-red-600,
+svg.text-red-500,
+.text-red-500,
+.text-red-600 {
+  color: #ef4444 !important;
+}
+
+svg.text-red-500,
+svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+button.text-red-500 svg,
+button.text-red-600 svg {
+  color: #ef4444 !important;
+}
+
+button.text-red-500 svg[fill="#ef4444"],
+button.text-red-600 svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+button.text-red-500 svg[stroke="#ef4444"],
+button.text-red-600 svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+/* اطمینان از اینکه لایک همیشه قرمز است */
+button[onclick*="toggleLike"] svg {
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* بهبود کنتراست برای select option */
+select option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در پس‌زمینه سفید تیره هستند */
+.bg-white > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-50 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-100 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای تمام div ها و span ها */
+div:not([class*="bg-"]):not([class*="text-"]),
+span:not([class*="bg-"]):not([class*="text-"]) {
+  color: #000000 !important;
+}
+
+/* Bottom sheet animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Top sheet animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Hide scrollbar for stories */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* بهبود اسکرول افقی برای استوری‌ها */
+.stories-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.stories-container > * {
+  flex-shrink: 0 !important;
+}
+
+/* سفید کردن تمام متن‌ها در باکس‌های آبی تیره */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+[class*="bg-blue-500"],
+[class*="bg-blue-600"],
+[class*="bg-blue-700"] {
+  color: #ffffff !important;
+}
+
+.bg-blue-500 *:not(input):not(textarea):not(select),
+.bg-blue-600 *:not(input):not(textarea):not(select),
+.bg-blue-700 *:not(input):not(textarea):not(select),
+[class*="bg-blue-500"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-600"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-700"] *:not(input):not(textarea):not(select) {
+  color: #ffffff !important;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000; /* کاملاً سیاه برای کنتراست حداکثری */
+  
+  /* Typography */
+  --font-primary: "IRANSans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Kalameh", "IRANSans", system-ui, sans-serif;
+  
+  /* Text Colors - خیلی تیره برای خوانایی کامل */
+  --text-primary: #000000;
+  --text-secondary: #1f2937;
+  --text-muted: #374151;
+  --text-light: #4b5563;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --text-primary: #ededed;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+  }
+}
+
+body {
+  background: var(--background);
+  color: #000000 !important;
+  font-family: var(--font-primary);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در body تیره هستند */
+body *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]):not([class*="text-red"]):not([class*="bg-"]) {
+  color: #000000 !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای کلاس‌های Tailwind - خیلی تیره */
+.text-gray-600 {
+  color: #1f2937 !important; /* خیلی تیره */
+}
+
+.text-gray-700 {
+  color: #111827 !important; /* تقریباً سیاه */
+}
+
+.text-gray-800 {
+  color: #000000 !important; /* کاملاً سیاه */
+}
+
+.text-gray-500 {
+  color: #374151 !important; /* تیره */
+}
+
+.text-gray-400 {
+  color: #4b5563 !important; /* تیره */
+}
+
+.text-gray-300 {
+  color: #6b7280 !important; /* تیره */
+}
+
+/* بهبود کنتراست برای متن‌های پیش‌فرض */
+p, span, div, label, button, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای متن‌های کوچک */
+.text-sm, .text-xs {
+  color: var(--text-secondary) !important;
+}
+
+/* بهبود کنتراست برای تمام متن‌ها در پس‌زمینه سفید */
+.bg-white * {
+  color: #191818 !important;
+}
+
+.bg-white p,
+.bg-white span,
+.bg-white div,
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white h4,
+.bg-white h5,
+.bg-white h6,
+.bg-white label {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای input ها */
+input,
+textarea,
+select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* بهبود کنتراست برای label ها */
+label {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* بهبود کنتراست برای input ها در پس‌زمینه روشن */
+.bg-gray-50 input,
+.bg-gray-50 textarea,
+.bg-gray-50 select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+.bg-white input,
+.bg-white textarea,
+.bg-white select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* بهبود کنتراست برای پس‌زمینه‌های روشن */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+/* بهبود کنتراست برای لینک‌ها */
+a {
+  color: #2563eb !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+}
+
+.bg-white a {
+  color: #2563eb !important;
+}
+
+.bg-white a:hover {
+  color: #1d4ed8 !important;
+}
+
+/* Mobile-first responsive container */
+.mobile-container {
+  max-width: 428px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* بهبود کنتراست برای دکمه‌ها */
+button {
+  color: inherit;
+}
+
+button.text-black {
+  color: #000000 !important;
+}
+
+button.text-gray-600 {
+  color: #1f2937 !important;
+}
+
+button.text-red-500,
+button.text-red-600,
+svg.text-red-500,
+.text-red-500,
+.text-red-600 {
+  color: #ef4444 !important;
+}
+
+svg.text-red-500,
+svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+button.text-red-500 svg,
+button.text-red-600 svg {
+  color: #ef4444 !important;
+}
+
+button.text-red-500 svg[fill="#ef4444"],
+button.text-red-600 svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+button.text-red-500 svg[stroke="#ef4444"],
+button.text-red-600 svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+/* اطمینان از اینکه لایک همیشه قرمز است */
+button[onclick*="toggleLike"] svg {
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* بهبود کنتراست برای select option */
+select option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در پس‌زمینه سفید تیره هستند */
+.bg-white > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-50 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-100 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای تمام div ها و span ها */
+div:not([class*="bg-"]):not([class*="text-"]),
+span:not([class*="bg-"]):not([class*="text-"]) {
+  color: #000000 !important;
+}
+
+/* Bottom sheet animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Top sheet animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Hide scrollbar for stories */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* بهبود اسکرول افقی برای استوری‌ها */
+.stories-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.stories-container > * {
+  flex-shrink: 0 !important;
+}
+
+/* سفید کردن تمام متن‌ها در باکس‌های آبی تیره */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+[class*="bg-blue-500"],
+[class*="bg-blue-600"],
+[class*="bg-blue-700"] {
+  color: #ffffff !important;
+}
+
+.bg-blue-500 *:not(input):not(textarea):not(select),
+.bg-blue-600 *:not(input):not(textarea):not(select),
+.bg-blue-700 *:not(input):not(textarea):not(select),
+[class*="bg-blue-500"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-600"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-700"] *:not(input):not(textarea):not(select) {
+  color: #ffffff !important;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000; /* کاملاً سیاه برای کنتراست حداکثری */
+  
+  /* Typography */
+  --font-primary: "IRANSans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Kalameh", "IRANSans", system-ui, sans-serif;
+  
+  /* Text Colors - خیلی تیره برای خوانایی کامل */
+  --text-primary: #000000;
+  --text-secondary: #1f2937;
+  --text-muted: #374151;
+  --text-light: #4b5563;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --text-primary: #ededed;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+  }
+}
+
+body {
+  background: var(--background);
+  color: #000000 !important;
+  font-family: var(--font-primary);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در body تیره هستند */
+body *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]):not([class*="text-red"]):not([class*="bg-"]) {
+  color: #000000 !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای کلاس‌های Tailwind - خیلی تیره */
+.text-gray-600 {
+  color: #1f2937 !important; /* خیلی تیره */
+}
+
+.text-gray-700 {
+  color: #111827 !important; /* تقریباً سیاه */
+}
+
+.text-gray-800 {
+  color: #000000 !important; /* کاملاً سیاه */
+}
+
+.text-gray-500 {
+  color: #374151 !important; /* تیره */
+}
+
+.text-gray-400 {
+  color: #4b5563 !important; /* تیره */
+}
+
+.text-gray-300 {
+  color: #6b7280 !important; /* تیره */
+}
+
+/* بهبود کنتراست برای متن‌های پیش‌فرض */
+p, span, div, label, button, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای متن‌های کوچک */
+.text-sm, .text-xs {
+  color: var(--text-secondary) !important;
+}
+
+/* بهبود کنتراست برای تمام متن‌ها در پس‌زمینه سفید */
+.bg-white * {
+  color: #191818 !important;
+}
+
+.bg-white p,
+.bg-white span,
+.bg-white div,
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white h4,
+.bg-white h5,
+.bg-white h6,
+.bg-white label {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای input ها */
+input,
+textarea,
+select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* بهبود کنتراست برای label ها */
+label {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* بهبود کنتراست برای input ها در پس‌زمینه روشن */
+.bg-gray-50 input,
+.bg-gray-50 textarea,
+.bg-gray-50 select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+.bg-white input,
+.bg-white textarea,
+.bg-white select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* بهبود کنتراست برای پس‌زمینه‌های روشن */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+/* بهبود کنتراست برای لینک‌ها */
+a {
+  color: #2563eb !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+}
+
+.bg-white a {
+  color: #2563eb !important;
+}
+
+.bg-white a:hover {
+  color: #1d4ed8 !important;
+}
+
+/* Mobile-first responsive container */
+.mobile-container {
+  max-width: 428px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* بهبود کنتراست برای دکمه‌ها */
+button {
+  color: inherit;
+}
+
+button.text-black {
+  color: #000000 !important;
+}
+
+button.text-gray-600 {
+  color: #1f2937 !important;
+}
+
+button.text-red-500,
+button.text-red-600,
+svg.text-red-500,
+.text-red-500,
+.text-red-600 {
+  color: #ef4444 !important;
+}
+
+svg.text-red-500,
+svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+button.text-red-500 svg,
+button.text-red-600 svg {
+  color: #ef4444 !important;
+}
+
+button.text-red-500 svg[fill="#ef4444"],
+button.text-red-600 svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+button.text-red-500 svg[stroke="#ef4444"],
+button.text-red-600 svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+/* اطمینان از اینکه لایک همیشه قرمز است */
+button[onclick*="toggleLike"] svg {
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* بهبود کنتراست برای select option */
+select option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در پس‌زمینه سفید تیره هستند */
+.bg-white > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-50 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-100 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای تمام div ها و span ها */
+div:not([class*="bg-"]):not([class*="text-"]),
+span:not([class*="bg-"]):not([class*="text-"]) {
+  color: #000000 !important;
+}
+
+/* Bottom sheet animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Top sheet animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Hide scrollbar for stories */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* بهبود اسکرول افقی برای استوری‌ها */
+.stories-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.stories-container > * {
+  flex-shrink: 0 !important;
+}
+
+/* سفید کردن تمام متن‌ها در باکس‌های آبی تیره */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+[class*="bg-blue-500"],
+[class*="bg-blue-600"],
+[class*="bg-blue-700"] {
+  color: #ffffff !important;
+}
+
+.bg-blue-500 *:not(input):not(textarea):not(select),
+.bg-blue-600 *:not(input):not(textarea):not(select),
+.bg-blue-700 *:not(input):not(textarea):not(select),
+[class*="bg-blue-500"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-600"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-700"] *:not(input):not(textarea):not(select) {
+  color: #ffffff !important;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000; /* کاملاً سیاه برای کنتراست حداکثری */
+  
+  /* Typography */
+  --font-primary: "IRANSans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Kalameh", "IRANSans", system-ui, sans-serif;
+  
+  /* Text Colors - خیلی تیره برای خوانایی کامل */
+  --text-primary: #000000;
+  --text-secondary: #1f2937;
+  --text-muted: #374151;
+  --text-light: #4b5563;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --text-primary: #ededed;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+  }
+}
+
+body {
+  background: var(--background);
+  color: #000000 !important;
+  font-family: var(--font-primary);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در body تیره هستند */
+body *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]):not([class*="text-red"]):not([class*="bg-"]) {
+  color: #000000 !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای کلاس‌های Tailwind - خیلی تیره */
+.text-gray-600 {
+  color: #1f2937 !important; /* خیلی تیره */
+}
+
+.text-gray-700 {
+  color: #111827 !important; /* تقریباً سیاه */
+}
+
+.text-gray-800 {
+  color: #000000 !important; /* کاملاً سیاه */
+}
+
+.text-gray-500 {
+  color: #374151 !important; /* تیره */
+}
+
+.text-gray-400 {
+  color: #4b5563 !important; /* تیره */
+}
+
+.text-gray-300 {
+  color: #6b7280 !important; /* تیره */
+}
+
+/* بهبود کنتراست برای متن‌های پیش‌فرض */
+p, span, div, label, button, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای متن‌های کوچک */
+.text-sm, .text-xs {
+  color: var(--text-secondary) !important;
+}
+
+/* بهبود کنتراست برای تمام متن‌ها در پس‌زمینه سفید */
+.bg-white * {
+  color: #191818 !important;
+}
+
+.bg-white p,
+.bg-white span,
+.bg-white div,
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white h4,
+.bg-white h5,
+.bg-white h6,
+.bg-white label {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای input ها */
+input,
+textarea,
+select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* بهبود کنتراست برای label ها */
+label {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* بهبود کنتراست برای input ها در پس‌زمینه روشن */
+.bg-gray-50 input,
+.bg-gray-50 textarea,
+.bg-gray-50 select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+.bg-white input,
+.bg-white textarea,
+.bg-white select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* بهبود کنتراست برای پس‌زمینه‌های روشن */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+/* بهبود کنتراست برای لینک‌ها */
+a {
+  color: #2563eb !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+}
+
+.bg-white a {
+  color: #2563eb !important;
+}
+
+.bg-white a:hover {
+  color: #1d4ed8 !important;
+}
+
+/* Mobile-first responsive container */
+.mobile-container {
+  max-width: 428px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* بهبود کنتراست برای دکمه‌ها */
+button {
+  color: inherit;
+}
+
+button.text-black {
+  color: #000000 !important;
+}
+
+button.text-gray-600 {
+  color: #1f2937 !important;
+}
+
+button.text-red-500,
+button.text-red-600,
+svg.text-red-500,
+.text-red-500,
+.text-red-600 {
+  color: #ef4444 !important;
+}
+
+svg.text-red-500,
+svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+button.text-red-500 svg,
+button.text-red-600 svg {
+  color: #ef4444 !important;
+}
+
+button.text-red-500 svg[fill="#ef4444"],
+button.text-red-600 svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+button.text-red-500 svg[stroke="#ef4444"],
+button.text-red-600 svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+/* اطمینان از اینکه لایک همیشه قرمز است */
+button[onclick*="toggleLike"] svg {
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* بهبود کنتراست برای select option */
+select option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در پس‌زمینه سفید تیره هستند */
+.bg-white > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-50 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-100 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای تمام div ها و span ها */
+div:not([class*="bg-"]):not([class*="text-"]),
+span:not([class*="bg-"]):not([class*="text-"]) {
+  color: #000000 !important;
+}
+
+/* Bottom sheet animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Top sheet animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Hide scrollbar for stories */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* بهبود اسکرول افقی برای استوری‌ها */
+.stories-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.stories-container > * {
+  flex-shrink: 0 !important;
+}
+
+/* سفید کردن تمام متن‌ها در باکس‌های آبی تیره */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+[class*="bg-blue-500"],
+[class*="bg-blue-600"],
+[class*="bg-blue-700"] {
+  color: #ffffff !important;
+}
+
+.bg-blue-500 *:not(input):not(textarea):not(select),
+.bg-blue-600 *:not(input):not(textarea):not(select),
+.bg-blue-700 *:not(input):not(textarea):not(select),
+[class*="bg-blue-500"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-600"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-700"] *:not(input):not(textarea):not(select) {
+  color: #ffffff !important;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kalameh";
+  src: url("/fonts/kalame/Kalameh_Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000; /* کاملاً سیاه برای کنتراست حداکثری */
+  
+  /* Typography */
+  --font-primary: "IRANSans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Kalameh", "IRANSans", system-ui, sans-serif;
+  
+  /* Text Colors - خیلی تیره برای خوانایی کامل */
+  --text-primary: #000000;
+  --text-secondary: #1f2937;
+  --text-muted: #374151;
+  --text-light: #4b5563;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --text-primary: #ededed;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+  }
+}
+
+body {
+  background: var(--background);
+  color: #000000 !important;
+  font-family: var(--font-primary);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در body تیره هستند */
+body *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]):not([class*="text-red"]):not([class*="bg-"]) {
+  color: #000000 !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای کلاس‌های Tailwind - خیلی تیره */
+.text-gray-600 {
+  color: #1f2937 !important; /* خیلی تیره */
+}
+
+.text-gray-700 {
+  color: #111827 !important; /* تقریباً سیاه */
+}
+
+.text-gray-800 {
+  color: #000000 !important; /* کاملاً سیاه */
+}
+
+.text-gray-500 {
+  color: #374151 !important; /* تیره */
+}
+
+.text-gray-400 {
+  color: #4b5563 !important; /* تیره */
+}
+
+.text-gray-300 {
+  color: #6b7280 !important; /* تیره */
+}
+
+/* بهبود کنتراست برای متن‌های پیش‌فرض */
+p, span, div, label, button, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+/* بهبود کنتراست برای متن‌های کوچک */
+.text-sm, .text-xs {
+  color: var(--text-secondary) !important;
+}
+
+/* بهبود کنتراست برای تمام متن‌ها در پس‌زمینه سفید */
+.bg-white * {
+  color: #191818 !important;
+}
+
+.bg-white p,
+.bg-white span,
+.bg-white div,
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white h4,
+.bg-white h5,
+.bg-white h6,
+.bg-white label {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای input ها */
+input,
+textarea,
+select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* بهبود کنتراست برای label ها */
+label {
+  color: #000000 !important;
+  font-weight: 500;
+}
+
+/* بهبود کنتراست برای input ها در پس‌زمینه روشن */
+.bg-gray-50 input,
+.bg-gray-50 textarea,
+.bg-gray-50 select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+}
+
+.bg-white input,
+.bg-white textarea,
+.bg-white select {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* بهبود کنتراست برای پس‌زمینه‌های روشن */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+/* بهبود کنتراست برای لینک‌ها */
+a {
+  color: #2563eb !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+}
+
+.bg-white a {
+  color: #2563eb !important;
+}
+
+.bg-white a:hover {
+  color: #1d4ed8 !important;
+}
+
+/* Mobile-first responsive container */
+.mobile-container {
+  max-width: 428px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* بهبود کنتراست برای دکمه‌ها */
+button {
+  color: inherit;
+}
+
+button.text-black {
+  color: #000000 !important;
+}
+
+button.text-gray-600 {
+  color: #1f2937 !important;
+}
+
+button.text-red-500,
+button.text-red-600,
+svg.text-red-500,
+.text-red-500,
+.text-red-600 {
+  color: #ef4444 !important;
+}
+
+svg.text-red-500,
+svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+button.text-red-500 svg,
+button.text-red-600 svg {
+  color: #ef4444 !important;
+}
+
+button.text-red-500 svg[fill="#ef4444"],
+button.text-red-600 svg[fill="#ef4444"] {
+  fill: #ef4444 !important;
+}
+
+button.text-red-500 svg[stroke="#ef4444"],
+button.text-red-600 svg[stroke="#ef4444"] {
+  stroke: #ef4444 !important;
+}
+
+/* اطمینان از اینکه لایک همیشه قرمز است */
+button[onclick*="toggleLike"] svg {
+  fill: #ef4444 !important;
+  stroke: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* بهبود کنتراست برای select option */
+select option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* اطمینان از اینکه تمام متن‌ها در پس‌زمینه سفید تیره هستند */
+.bg-white > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-50 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+.bg-gray-100 > *:not(button):not(input):not(textarea):not(select):not(svg):not(.text-white):not([class*="text-white"]) {
+  color: #000000 !important;
+}
+
+/* بهبود کنتراست برای تمام div ها و span ها */
+div:not([class*="bg-"]):not([class*="text-"]),
+span:not([class*="bg-"]):not([class*="text-"]) {
+  color: #000000 !important;
+}
+
+/* Bottom sheet animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Top sheet animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Hide scrollbar for stories */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* بهبود اسکرول افقی برای استوری‌ها */
+.stories-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.stories-container > * {
+  flex-shrink: 0 !important;
+}
+
+/* سفید کردن تمام متن‌ها در باکس‌های آبی تیره */
+.bg-blue-500,
+.bg-blue-600,
+.bg-blue-700,
+[class*="bg-blue-500"],
+[class*="bg-blue-600"],
+[class*="bg-blue-700"] {
+  color: #ffffff !important;
+}
+
+.bg-blue-500 *:not(input):not(textarea):not(select),
+.bg-blue-600 *:not(input):not(textarea):not(select),
+.bg-blue-700 *:not(input):not(textarea):not(select),
+[class*="bg-blue-500"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-600"] *:not(input):not(textarea):not(select),
+[class*="bg-blue-700"] *:not(input):not(textarea):not(select) {
+  color: #ffffff !important;
+}
