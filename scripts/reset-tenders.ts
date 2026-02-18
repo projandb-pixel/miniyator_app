@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import crypto from 'node:crypto';
+import { prisma } from '../lib/prisma';
 
 // یک تصویر base64 نمونه (یک تصویر 1x1 پیکسل PNG شفاف)
 const sampleImageBase64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
